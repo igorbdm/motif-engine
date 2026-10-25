@@ -1,26 +1,26 @@
 {
   "schema": 1,
   "edition_key": "auto-2026-10-25",
-  "request_id": "e1-r1-bf3ae1",
+  "request_id": "e1-r2-0a1f68",
   "edition_date": "2026-10-25",
   "window": {
     "start": "2026-10-18T00:00:00-03:00",
-    "end": "2026-10-25T11:13:44-03:00"
+    "end": "2026-10-25T11:14:43-03:00"
   },
-  "generated_at": "2026-10-25T14:13:44+00:00",
+  "generated_at": "2026-10-25T14:14:43+00:00",
   "run": {
-    "id": 40201227449,
-    "url": "https://github.com/igorbdm/motif-engine/actions/runs/40201227449"
+    "id": 40201305489,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/40201305489"
   },
   "song_of_the_week": {
     "artist": "Gyedu-Blay Ambolley",
-    "title": "simigwa",
+    "title": "Frafranta",
     "album": "Ambolley",
     "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/5ae78260e8c9195dfd8cd3eb8df9be20.png",
     "links": {
-      "spotify": "https://open.spotify.com/search/Gyedu-Blay%20Ambolley%20simigwa",
-      "apple_music": "https://music.apple.com/us/album/simigwa/1456307983?i=1456308210",
-      "youtube_music": "https://music.youtube.com/search?q=Gyedu-Blay+Ambolley+simigwa"
+      "spotify": "https://open.spotify.com/search/Gyedu-Blay%20Ambolley%20Frafranta",
+      "apple_music": "https://music.apple.com/us/album/frafranta/1456307983?i=1456308211",
+      "youtube_music": "https://music.youtube.com/watch?v=8Q2_FSIc9to"
     }
   },
   "videos": [
