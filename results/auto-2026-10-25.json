@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "edition_key": "auto-2026-10-25",
+  "request_id": "e1-r1-bf3ae1",
+  "edition_date": "2026-10-25",
+  "window": {
+    "start": "2026-10-18T00:00:00-03:00",
+    "end": "2026-10-25T11:13:44-03:00"
+  },
+  "generated_at": "2026-10-25T14:13:44+00:00",
+  "run": {
+    "id": 40201227449,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/40201227449"
+  },
+  "song_of_the_week": {
+    "artist": "Gyedu-Blay Ambolley",
+    "title": "simigwa",
+    "album": "Ambolley",
+    "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/5ae78260e8c9195dfd8cd3eb8df9be20.png",
+    "links": {
+      "spotify": "https://open.spotify.com/search/Gyedu-Blay%20Ambolley%20simigwa",
+      "apple_music": "https://music.apple.com/us/album/simigwa/1456307983?i=1456308210",
+      "youtube_music": "https://music.youtube.com/search?q=Gyedu-Blay+Ambolley+simigwa"
+    }
+  },
+  "videos": [
+    {
+      "id": "fTmmYzD4QQk",
+      "title": "OSEES - Full Performance (Live on KEXP)",
+      "display_title": "OSEES — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=fTmmYzD4QQk",
+      "section": "live",
+      "genre": "garage rock",
+      "published": "2026-10-23T15:36:07Z"
+    },
+    {
+      "id": "dicxqRQZmko",
+      "title": "The Panturas - Full Performance (Live on KEXP)",
+      "display_title": "The Panturas — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=dicxqRQZmko",
+      "section": "live",
+      "genre": "surf rock",
+      "published": "2026-10-22T15:00:39Z"
+    },
+    {
+      "id": "988NAhJ13Kw",
+      "title": "Numeron - Full Performance (Live on KEXP)",
+      "display_title": "Numeron — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=988NAhJ13Kw",
+      "section": "live",
+      "genre": "metal",
+      "published": "2026-10-21T15:00:21Z"
+    },
+    {
+      "id": "yZXpav794BY",
+      "title": "TONTRAKUL - Full Performance (Live on KEXP)",
+      "display_title": "TONTRAKUL — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=yZXpav794BY",
+      "section": "live",
+      "genre": "thai indie",
+      "published": "2026-10-20T15:00:17Z"
+    },
+    {
+      "id": "_Mp_bpIZKlI",
+      "title": "Brìghde Chaimbeul: Tiny Desk Concert",
+      "display_title": "Brìghde Chaimbeul — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=_Mp_bpIZKlI",
+      "section": "live",
+      "genre": "folk",
+      "published": "2026-10-23T09:00:28Z"
+    },
+    {
+      "id": "HYA9e0XOUGk",
+      "title": "Cardi B: Tiny Desk Concert",
+      "display_title": "Cardi B — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=HYA9e0XOUGk",
+      "section": "live",
+      "genre": "hip-hop",
+      "published": "2026-10-19T16:00:08Z"
+    },
+    {
+      "id": "bDtZqIWWmwY",
+      "title": "Downswing on Audiotree Live (Full Session)",
+      "display_title": "Downswing — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=bDtZqIWWmwY",
+      "section": "live",
+      "genre": "hardcore",
+      "published": "2026-10-21T17:00:09Z"
+    },
+    {
+      "id": "RY1Gx86bMu8",
+      "title": "Penelope Road on Audiotree Live (Full Session)",
+      "display_title": "Penelope Road — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=RY1Gx86bMu8",
+      "section": "live",
+      "genre": "soul",
+      "published": "2026-10-20T17:00:07Z"
+    },
+    {
+      "id": "RCj3KIhTfeA",
+      "title": "Ra Ra Viper on Audiotree Live (Full Session)",
+      "display_title": "Ra Ra Viper — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=RCj3KIhTfeA",
+      "section": "live",
+      "genre": "jazz",
+      "published": "2026-10-19T17:00:08Z"
+    },
+    {
+      "id": "-wnTJLu9S9c",
+      "title": "CULTURA LIVRE | GETÚLIO ABELHA | 24/10/26",
+      "display_title": "GETÚLIO ABELHA — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=-wnTJLu9S9c",
+      "section": "live",
+      "genre": "art pop",
+      "published": "2026-10-24T22:30:08Z"
+    },
+    {
+      "id": "x4SZYem3yLw",
+      "title": "Imperial Teen's \"What's In My Bag?\" | Amoeba Music",
+      "display_title": "Imperial Teen — What's In My Bag?",
+      "channel": "Amoeba Music",
+      "link": "https://www.youtube.com/watch?v=x4SZYem3yLw",
+      "section": "extras",
+      "genre": null,
+      "published": "2026-10-19T15:59:35Z"
+    }
+  ],
+  "warnings": []
+}
