@@ -1,0 +1,80 @@
+name: Coletar edição
+
+# Disparado pelo CMS (motif-site). O nome da execução leva o request_id para
+# o CMS encontrar a execução que ele pediu.
+run-name: "Coletar ${{ inputs.edition_key }} (${{ inputs.request_id }})"
+
+on:
+  workflow_dispatch:
+    inputs:
+      edition_key:
+        description: "Identificador da edição no CMS (ex.: auto-2026-10-30)"
+        required: true
+        type: string
+      request_id:
+        description: "Identificador do pedido, gerado pelo CMS"
+        required: true
+        type: string
+      edition_date:
+        description: "Data da edição (AAAA-MM-DD). Vazio: próxima sexta-feira"
+        required: false
+        type: string
+      since:
+        description: "Início da coleta (ISO 8601). Vazio: meia-noite da edição anterior"
+        required: false
+        type: string
+      state:
+        description: "Histórico da Song of the Week e correções de gênero (JSON, enviado pelo CMS)"
+        required: false
+        type: string
+        default: "{}"
+
+permissions:
+  # Necessário para salvar o resultado e o cache de gêneros.
+  contents: write
+
+concurrency:
+  group: motif-engine-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+      LASTFM_USERNAME: igor8
+      # Os parâmetros entram como variáveis de ambiente, nunca no texto dos comandos.
+      EDITION_KEY: ${{ inputs.edition_key }}
+      REQUEST_ID: ${{ inputs.request_id }}
+      EDITION_DATE: ${{ inputs.edition_date }}
+      SINCE: ${{ inputs.since }}
+      ENGINE_STATE: ${{ inputs.state }}
+    steps:
+      - name: Baixar o projeto
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: python -m pip install -r requirements.txt
+
+      - name: Coletar vídeos e Song of the Week
+        run: python src/main.py
+
+      - name: Salvar resultado e gêneros descobertos
+        run: |
+          git add results/ data/
+          if git diff --cached --quiet; then
+            echo "Nada novo para salvar."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Resultado da coleta $EDITION_KEY"
+          git pull --rebase
+          git push
