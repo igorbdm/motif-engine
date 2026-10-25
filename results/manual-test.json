@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "edition_key": "manual-test",
+  "request_id": "manual-1",
+  "edition_date": "2026-10-30",
+  "window": {
+    "start": "2026-10-23T00:00:00-03:00",
+    "end": "2026-10-25T11:05:27-03:00"
+  },
+  "generated_at": "2026-10-25T14:05:27+00:00",
+  "run": {
+    "id": 40200584649,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/40200584649"
+  },
+  "song_of_the_week": {
+    "artist": "Gyedu-Blay Ambolley",
+    "title": "Highlife",
+    "album": "Ambolley",
+    "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/5ae78260e8c9195dfd8cd3eb8df9be20.png",
+    "links": {
+      "spotify": "https://open.spotify.com/search/Gyedu-Blay%20Ambolley%20Highlife",
+      "apple_music": "https://music.apple.com/us/album/highlife/1456307983?i=1456307984",
+      "youtube_music": "https://music.youtube.com/watch?v=IjwXUu3CRXU"
+    }
+  },
+  "videos": [
+    {
+      "id": "fTmmYzD4QQk",
+      "title": "OSEES - Full Performance (Live on KEXP)",
+      "display_title": "OSEES — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=fTmmYzD4QQk",
+      "section": "live",
+      "genre": "garage rock",
+      "published": "2026-10-23T15:36:07Z"
+    },
+    {
+      "id": "_Mp_bpIZKlI",
+      "title": "Brìghde Chaimbeul: Tiny Desk Concert",
+      "display_title": "Brìghde Chaimbeul — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=_Mp_bpIZKlI",
+      "section": "live",
+      "genre": "folk",
+      "published": "2026-10-23T09:00:28Z"
+    },
+    {
+      "id": "-wnTJLu9S9c",
+      "title": "CULTURA LIVRE | GETÚLIO ABELHA | 24/10/26",
+      "display_title": "GETÚLIO ABELHA — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=-wnTJLu9S9c",
+      "section": "live",
+      "genre": "art pop",
+      "published": "2026-10-24T22:30:08Z"
+    }
+  ],
+  "warnings": []
+}
