@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "edition_key": "auto-2026-10-30",
+  "request_id": "e2-r1-1aee59",
+  "edition_date": "2026-10-30",
+  "window": {
+    "start": "2026-10-23T00:00:00-03:00",
+    "end": "2026-10-30T07:00:19-03:00"
+  },
+  "generated_at": "2026-10-30T10:00:19+00:00",
+  "run": {
+    "id": 41037485634,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/41037485634"
+  },
+  "song_of_the_week": {
+    "artist": "Terraplana",
+    "title": "hear a whisper",
+    "album": null,
+    "image": null,
+    "links": {
+      "spotify": "https://open.spotify.com/search/Terraplana%20hear%20a%20whisper",
+      "apple_music": "https://music.apple.com/us/album/hear-a-whisper-feat-winter/1791123779?i=1791124093",
+      "youtube_music": "https://music.youtube.com/watch?v=T2XVk3iw8CA"
+    }
+  },
+  "videos": [
+    {
+      "id": "YdSY5DPq9n4",
+      "title": "Basajan - Full Performance (Live on KEXP)",
+      "display_title": "Basajan — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=YdSY5DPq9n4",
+      "section": "live",
+      "genre": "psychedelic",
+      "published": "2026-10-29T15:00:19Z"
+    },
+    {
+      "id": "7hAX5Jfc7jk",
+      "title": "Yellow Fang - Full Performance (Live on KEXP)",
+      "display_title": "Yellow Fang — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=7hAX5Jfc7jk",
+      "section": "live",
+      "genre": "shoegaze",
+      "published": "2026-10-28T15:00:02Z"
+    },
+    {
+      "id": "qWsLRr8hCHU",
+      "title": "motifs - Full Performance (Live on KEXP)",
+      "display_title": "motifs — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=qWsLRr8hCHU",
+      "section": "live",
+      "genre": "dream pop",
+      "published": "2026-10-27T15:00:04Z"
+    },
+    {
+      "id": "4QR09jzaQ1o",
+      "title": "Wildwood Sessions - Full Performance (Live on KEXP)",
+      "display_title": "Wildwood Sessions — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=4QR09jzaQ1o",
+      "section": "live",
+      "genre": "hip hop",
+      "published": "2026-10-26T15:00:05Z"
+    },
+    {
+      "id": "fTmmYzD4QQk",
+      "title": "OSEES - Full Performance (Live on KEXP)",
+      "display_title": "OSEES — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=fTmmYzD4QQk",
+      "section": "live",
+      "genre": "garage rock",
+      "published": "2026-10-23T15:36:07Z"
+    },
+    {
+      "id": "XoH44mH5laY",
+      "title": "Richard O'Brien's 'The Rocky Horror Show': Tiny Desk Concert",
+      "display_title": "Richard O'Brien's 'The Rocky Horror Show' — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=XoH44mH5laY",
+      "section": "live",
+      "genre": null,
+      "published": "2026-10-30T09:00:39Z"
+    },
+    {
+      "id": "xPIMk4d4ulI",
+      "title": "CMAT: Tiny Desk Concert",
+      "display_title": "CMAT — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=xPIMk4d4ulI",
+      "section": "live",
+      "genre": "indie pop",
+      "published": "2026-10-27T09:00:25Z"
+    },
+    {
+      "id": "_Mp_bpIZKlI",
+      "title": "Brìghde Chaimbeul: Tiny Desk Concert",
+      "display_title": "Brìghde Chaimbeul — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=_Mp_bpIZKlI",
+      "section": "live",
+      "genre": "folk",
+      "published": "2026-10-23T09:00:28Z"
+    },
+    {
+      "id": "r9OjK4H8PDM",
+      "title": "Novulent on Audiotree Live (Full Session)",
+      "display_title": "Novulent — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=r9OjK4H8PDM",
+      "section": "live",
+      "genre": "shoegaze",
+      "published": "2026-10-26T17:00:08Z"
+    },
+    {
+      "id": "XhGLbIavVqY",
+      "title": "Peter Bjorn and John: Live on KCRW",
+      "display_title": "Peter Bjorn and John — Live on KCRW",
+      "channel": "KCRW",
+      "link": "https://www.youtube.com/watch?v=XhGLbIavVqY",
+      "section": "live",
+      "genre": "indie",
+      "published": "2026-10-28T14:00:32Z"
+    },
+    {
+      "id": "-wnTJLu9S9c",
+      "title": "CULTURA LIVRE | GETÚLIO ABELHA | 24/10/26",
+      "display_title": "GETÚLIO ABELHA — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=-wnTJLu9S9c",
+      "section": "live",
+      "genre": "art pop",
+      "published": "2026-10-24T22:30:08Z"
+    },
+    {
+      "id": "Hli-7G8qFs4",
+      "title": "The Garden's \"What's In My Bag?\" | Amoeba Music",
+      "display_title": "The Garden — What's In My Bag?",
+      "channel": "Amoeba Music",
+      "link": "https://www.youtube.com/watch?v=Hli-7G8qFs4",
+      "section": "extras",
+      "genre": null,
+      "published": "2026-10-26T16:02:44Z"
+    }
+  ],
+  "warnings": []
+}
