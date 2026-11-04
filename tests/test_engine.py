@@ -277,7 +277,37 @@ class SongOfTheWeekTests(unittest.TestCase):
             "album": "Record",
             "image": "https://example.com/c.jpg",
             "links": {"spotify": "https://s"},
+            "source": "draw",
         })
+
+    def test_manual_choice_skips_the_draw_even_if_already_recommended(self):
+        import song_of_the_week
+
+        history = [{"artist": "Artist", "title": "Old"}]
+        with patch.dict("os.environ", {}, clear=True), \
+            patch.object(song_of_the_week.lastfm, "get_top_tracks") as top_tracks, \
+            patch.object(song_of_the_week.lastfm, "get_track_info", return_value={"album": "Record", "image": None}), \
+            patch.object(song_of_the_week, "get_streaming_links", return_value={"spotify": "https://s"}):
+            pick = song_of_the_week.get_song_of_the_week(history, choice={"artist": "Artist", "title": "Old"})
+
+        top_tracks.assert_not_called()
+        self.assertEqual(pick, {
+            "artist": "Artist",
+            "title": "Old",
+            "album": "Record",
+            "image": None,
+            "links": {"spotify": "https://s"},
+            "source": "manual",
+        })
+
+    def test_manual_choice_survives_lastfm_failure(self):
+        import song_of_the_week
+
+        with patch.object(song_of_the_week.lastfm, "get_track_info", side_effect=RuntimeError("offline")), \
+            patch.object(song_of_the_week, "get_streaming_links", return_value={}):
+            pick = song_of_the_week.get_song_of_the_week([], choice={"artist": "Artist", "title": "Song"})
+
+        self.assertEqual((pick["title"], pick["album"], pick["source"]), ("Song", None, "manual"))
 
     def test_lastfm_failure_does_not_block_the_newsletter(self):
         import song_of_the_week
@@ -627,6 +657,21 @@ class MainTests(unittest.TestCase):
         self.assertEqual(parameters["since"].isoformat(), "2026-08-28T07:00:00-03:00")
         self.assertEqual(parameters["song_history"], [{"artist": "Artist", "title": "Song"}])
         self.assertEqual(parameters["genre_overrides"], {"Rostam": "", "Wednesday": "indie rock"})
+        self.assertIsNone(parameters["song_choice"])
+
+    def test_song_choice_comes_from_the_cms(self):
+        import main
+
+        for choice, expected in (
+            ({"artist": " Artist ", "title": "Song"}, {"artist": "Artist", "title": "Song"}),
+            ({"artist": "Artist", "title": ""}, None),
+            ("Artist - Song", None),
+        ):
+            with self.subTest(choice=choice):
+                parameters = main.read_parameters(self.environ(
+                    EDITION_DATE="2026-09-04", ENGINE_STATE=json.dumps({"song_choice": choice}),
+                ))
+                self.assertEqual(parameters["song_choice"], expected)
 
     def test_invalid_keys_are_rejected(self):
         import main
@@ -656,7 +701,7 @@ class MainTests(unittest.TestCase):
 
         self.assertEqual(len(since_values), len(main.CHANNELS))
         self.assertTrue(all(value.isoformat() == "2026-08-21T00:00:00-03:00" for value in since_values))
-        song.assert_called_once_with([])
+        song.assert_called_once_with([], choice=None)
         return result
 
     def test_result_follows_the_cms_contract(self):

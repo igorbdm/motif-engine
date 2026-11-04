@@ -12,7 +12,9 @@ Parâmetros (variáveis de ambiente, preenchidas pelo workflow):
   SINCE         início da coleta (ISO 8601); padrão: meia-noite da edição
                 anterior, sete dias antes, no horário de São Paulo
   ENGINE_STATE  JSON com o estado guardado no CMS:
-                {"song_history": [{"artist", "title"}], "genre_overrides": {"artista": "gênero"}}
+                {"song_history": [{"artist", "title"}], "genre_overrides": {"artista": "gênero"},
+                 "song_choice": {"artist", "title"} (opcional: Song of the Week escolhida
+                 no CMS; sem ela, a música é sorteada)}
 """
 
 import json
@@ -81,6 +83,12 @@ def read_parameters(environ=None):
         for artist, genre in (state.get("genre_overrides") or {}).items()
     }
 
+    choice = state.get("song_choice")
+    if isinstance(choice, dict) and str(choice.get("artist") or "").strip() and str(choice.get("title") or "").strip():
+        choice = {"artist": str(choice["artist"]).strip(), "title": str(choice["title"]).strip()}
+    else:
+        choice = None
+
     return {
         "edition_key": edition_key,
         "request_id": request_id,
@@ -88,6 +96,7 @@ def read_parameters(environ=None):
         "since": since,
         "song_history": history,
         "genre_overrides": overrides,
+        "song_choice": choice,
     }
 
 
@@ -117,7 +126,7 @@ def collect(parameters):
     else:
         warnings.append("Nenhum vídeo novo encontrado nos canais acompanhados.")
 
-    pick = get_song_of_the_week(parameters["song_history"])
+    pick = get_song_of_the_week(parameters["song_history"], choice=parameters.get("song_choice"))
     if not pick:
         warnings.append("Edição sem Song of the Week (veja o log da execução).")
 

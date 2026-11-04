@@ -12,7 +12,9 @@ títulos, gêneros e regras da Song of the Week).
 
 1. Na hora da coleta, o CMS dispara o workflow **Coletar edição**
    (`.github/workflows/collect.yml`) com os parâmetros da edição e o estado que
-   ele guarda: o histórico da Song of the Week e as correções de gênero.
+   ele guarda: o histórico da Song of the Week, as correções de gênero e, se o
+   editor escolheu a música no painel, `song_choice` (`{artist, title}`). Com
+   ela, o sorteio não acontece: o motor só busca álbum, capa e links.
 2. O workflow roda `src/main.py`, grava `results/<edition_key>.json` e faz
    commit desse arquivo e do cache de gêneros (`data/artist_genres.json`).
 3. O CMS acompanha a execução pela API do GitHub e, quando ela termina, lê o
@@ -20,7 +22,7 @@ títulos, gêneros e regras da Song of the Week).
 
 O formato do resultado é o contrato `schema: 1`, o mesmo de
 `modules/motif-newsletter/data/sample-edition.json` no `motif-site`:
-`song_of_the_week` (ou `null`), `videos` (`section` `live` ou `extras`,
+`song_of_the_week` (ou `null`; `source` é `manual` ou `draw`), `videos` (`section` `live` ou `extras`,
 `genre` ou `null`), mais `edition_key`, `request_id`, `window`, `run` e
 `warnings`.
 

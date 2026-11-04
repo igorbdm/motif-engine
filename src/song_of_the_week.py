@@ -15,6 +15,11 @@ Como funciona:
 O histórico vem do CMS a cada execução (é ele quem registra a música quando
 a edição é enviada aos assinantes) e chega aqui como uma lista de
 {"artist", "title"}.
+
+Escolha manual: se o CMS mandar uma música escolhida no painel
+({"artist", "title"}), o sorteio não acontece e ela vale mesmo que já tenha
+sido recomendada ou seja de um artista recente (o CMS já avisou isso). O
+motor só busca álbum, capa e links.
 """
 
 import os
@@ -68,12 +73,17 @@ def choose_track(tracks, history, rng=random):
     return rng.choices(candidates, weights=weights, k=1)[0]
 
 
-def get_song_of_the_week(history, username=None, rng=random):
-    """Retorna {"artist", "title", "album", "image", "links"} ou None.
+def get_song_of_the_week(history, username=None, rng=random, choice=None):
+    """Retorna {"artist", "title", "album", "image", "links", "source"} ou None.
 
-    Qualquer problema com o Last.fm é avisado no log, mas não impede o envio
-    da newsletter: a edição sai sem a seção.
+    source é "manual" (escolhida no CMS) ou "draw" (sorteada). Qualquer
+    problema com o Last.fm é avisado no log, mas não impede o envio da
+    newsletter: a edição sai sem a seção (ou, na escolha manual, sem capa).
     """
+    if choice:
+        print(f"Song of the Week escolhida no CMS: {choice['artist']} — {choice['title']}.")
+        return describe_track(choice, "manual")
+
     username = username or os.environ.get("LASTFM_USERNAME")
 
     if not username or not os.environ.get("LASTFM_API_KEY"):
@@ -89,19 +99,28 @@ def get_song_of_the_week(history, username=None, rng=random):
             print("Nenhuma música nova para recomendar. Edição sem Song of the Week.")
             return None
 
-        try:
-            info = lastfm.get_track_info(track["artist"], track["title"])
-        except Exception as error:
-            print(f"Álbum e capa não encontrados no Last.fm ({error}). A música vai sem eles.")
-            info = {"album": None, "image": None}
-
-        return {
-            "artist": track["artist"],
-            "title": track["title"],
-            "album": info["album"],
-            "image": info["image"],
-            "links": get_streaming_links(track["artist"], track["title"]),
-        }
+        return describe_track(track, "draw")
     except Exception as error:
         print(f"Não foi possível escolher a Song of the Week: {error}. Edição sem a seção.")
         return None
+
+
+def describe_track(track, source):
+    """Álbum, capa e links da música. Sem álbum e capa, a música vai assim mesmo.
+
+    get_streaming_links nunca falha: na pior hipótese, devolve links de busca.
+    """
+    try:
+        info = lastfm.get_track_info(track["artist"], track["title"])
+    except Exception as error:
+        print(f"Álbum e capa não encontrados no Last.fm ({error}). A música vai sem eles.")
+        info = {"album": None, "image": None}
+
+    return {
+        "artist": track["artist"],
+        "title": track["title"],
+        "album": info["album"],
+        "image": info["image"],
+        "links": get_streaming_links(track["artist"], track["title"]),
+        "source": source,
+    }
