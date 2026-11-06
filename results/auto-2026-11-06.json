@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "edition_key": "auto-2026-11-06",
+  "request_id": "e4-r1-fa2f6c",
+  "edition_date": "2026-11-06",
+  "window": {
+    "start": "2026-10-30T07:00:19-03:00",
+    "end": "2026-11-06T07:00:20-03:00"
+  },
+  "generated_at": "2026-11-06T10:00:20+00:00",
+  "run": {
+    "id": 42199241225,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/42199241225"
+  },
+  "song_of_the_week": {
+    "artist": "Pelican",
+    "title": "Gulch",
+    "album": "Flickering Resonance",
+    "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/cf864a35f24bef1a8e8abc676c463ab8.png",
+    "links": {
+      "spotify": "https://open.spotify.com/search/Pelican%20Gulch",
+      "apple_music": "https://music.apple.com/us/album/gulch/1790454812?i=1790454828",
+      "youtube_music": "https://music.youtube.com/watch?v=cteSz3oJQNA"
+    },
+    "source": "manual"
+  },
+  "videos": [
+    {
+      "id": "u-pJE8Udvpg",
+      "title": "Hariguem Zaboy - Full Performance (Live on KEXP)",
+      "display_title": "Hariguem Zaboy — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=u-pJE8Udvpg",
+      "section": "live",
+      "genre": "shoegaze",
+      "published": "2026-11-05T16:00:22Z"
+    },
+    {
+      "id": "GXVZMiDbtiM",
+      "title": "sub:shaman - Full Performance (Live on KEXP)",
+      "display_title": "sub:shaman — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=GXVZMiDbtiM",
+      "section": "live",
+      "genre": "math rock",
+      "published": "2026-11-04T16:00:20Z"
+    },
+    {
+      "id": "BWyrhKi-0Ck",
+      "title": "Çudamani - Full Performance (Live on KEXP)",
+      "display_title": "Çudamani — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=BWyrhKi-0Ck",
+      "section": "live",
+      "genre": null,
+      "published": "2026-11-03T16:00:26Z"
+    },
+    {
+      "id": "dW_7LAB1zF8",
+      "title": "Chanpan - Full Performance (Live on KEXP)",
+      "display_title": "Chanpan — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=dW_7LAB1zF8",
+      "section": "live",
+      "genre": "pop",
+      "published": "2026-11-02T16:00:21Z"
+    },
+    {
+      "id": "egDlxXlgfH8",
+      "title": "Russian Circles - Full Performance (Live on KEXP)",
+      "display_title": "Russian Circles — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=egDlxXlgfH8",
+      "section": "live",
+      "genre": "post-rock",
+      "published": "2026-10-30T15:13:27Z"
+    },
+    {
+      "id": "LtUDeizHqKk",
+      "title": "Fat Joe: Tiny Desk Concert",
+      "display_title": "Fat Joe — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=LtUDeizHqKk",
+      "section": "live",
+      "genre": "hip-hop",
+      "published": "2026-11-05T10:00:11Z"
+    },
+    {
+      "id": "73wCQRQb7v0",
+      "title": "Jungle: Tiny Desk Concert",
+      "display_title": "Jungle — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=73wCQRQb7v0",
+      "section": "live",
+      "genre": "electronic",
+      "published": "2026-11-02T10:00:33Z"
+    },
+    {
+      "id": "fPnkAfXeArM",
+      "title": "Ella Red on Audiotree Live (Full Session)",
+      "display_title": "Ella Red — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=fPnkAfXeArM",
+      "section": "live",
+      "genre": "pop",
+      "published": "2026-11-04T18:00:10Z"
+    },
+    {
+      "id": "jWJ3KuGTaVI",
+      "title": "This Is Lorelei: Live On KCRW",
+      "display_title": "This Is Lorelei — Live on KCRW",
+      "channel": "KCRW",
+      "link": "https://www.youtube.com/watch?v=jWJ3KuGTaVI",
+      "section": "live",
+      "genre": "indie pop",
+      "published": "2026-11-04T15:00:35Z"
+    },
+    {
+      "id": "H51j2F6vWSI",
+      "title": "CULTURA LIVRE | VARANDA | 31/10/26",
+      "display_title": "VARANDA — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=H51j2F6vWSI",
+      "section": "live",
+      "genre": "psychedelic rock",
+      "published": "2026-10-31T22:30:07Z"
+    },
+    {
+      "id": "tYgFxPoJS3o",
+      "title": "Violet Grohl 's \"What's In My Bag?\" | Amoeba Music",
+      "display_title": "Violet Grohl — What's In My Bag?",
+      "channel": "Amoeba Music",
+      "link": "https://www.youtube.com/watch?v=tYgFxPoJS3o",
+      "section": "extras",
+      "genre": null,
+      "published": "2026-11-02T17:00:26Z"
+    }
+  ],
+  "warnings": []
+}
