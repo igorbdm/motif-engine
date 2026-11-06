@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "edition_key": "test-2026-11-13-76fed9",
+  "request_id": "e23-r1-e9305f",
+  "edition_date": "2026-11-13",
+  "window": {
+    "start": "2026-11-06T00:00:00-03:00",
+    "end": "2026-11-05T22:53:20-03:00"
+  },
+  "generated_at": "2026-11-06T01:53:20+00:00",
+  "run": {
+    "id": 42146743380,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/42146743380"
+  },
+  "song_of_the_week": {
+    "artist": "Pelican",
+    "title": "Threnody",
+    "album": "Forever Becoming",
+    "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/8f9d912df0364d138e5e7509ca59c69b.png",
+    "links": {
+      "spotify": "https://open.spotify.com/search/Pelican%20Threnody",
+      "apple_music": "https://music.apple.com/us/album/threnody/1451124621?i=1451124705",
+      "youtube_music": "https://music.youtube.com/watch?v=bvaVoooLFyA"
+    },
+    "source": "draw"
+  },
+  "videos": [],
+  "warnings": [
+    "Nenhum vídeo novo encontrado nos canais acompanhados."
+  ]
+}
