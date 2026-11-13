@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "edition_key": "auto-2026-11-13",
+  "request_id": "e5-r1-18f9f3",
+  "edition_date": "2026-11-13",
+  "window": {
+    "start": "2026-11-06T07:00:20-03:00",
+    "end": "2026-11-13T07:00:17-03:00"
+  },
+  "generated_at": "2026-11-13T10:00:17+00:00",
+  "run": {
+    "id": 43405697141,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/43405697141"
+  },
+  "song_of_the_week": {
+    "artist": "Boards of Canada",
+    "title": "Olson",
+    "album": "Music Has the Right to Children",
+    "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/5964ceac5b219e3ae5e2242f7a5d3c96.png",
+    "links": {
+      "spotify": "https://open.spotify.com/search/Boards%20of%20Canada%20Olson",
+      "apple_music": "https://music.apple.com/us/album/olson/281116024?i=281116088",
+      "youtube_music": "https://music.youtube.com/watch?v=6_lzNFjqGiw"
+    },
+    "source": "draw"
+  },
+  "videos": [
+    {
+      "id": "Qws6-I8IDQE",
+      "title": "Commemorate - Full Performance (Live on KEXP)",
+      "display_title": "Commemorate — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=Qws6-I8IDQE",
+      "section": "live",
+      "genre": "indie",
+      "published": "2026-11-12T16:00:07Z"
+    },
+    {
+      "id": "BlKQ30FYJNg",
+      "title": "Inspirative - Full Performance (Live on KEXP)",
+      "display_title": "Inspirative — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=BlKQ30FYJNg",
+      "section": "live",
+      "genre": "post-rock",
+      "published": "2026-11-11T16:00:31Z"
+    },
+    {
+      "id": "qbYI8cixutY",
+      "title": "Slowwves - Full Performance (Live on KEXP)",
+      "display_title": "Slowwves — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=qbYI8cixutY",
+      "section": "live",
+      "genre": "shoegaze",
+      "published": "2026-11-10T16:00:04Z"
+    },
+    {
+      "id": "fJjg0QykS5Q",
+      "title": "anaiis - Full Performance (Live on KEXP)",
+      "display_title": "anaiis — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=fJjg0QykS5Q",
+      "section": "live",
+      "genre": "rnb",
+      "published": "2026-11-09T03:31:38Z"
+    },
+    {
+      "id": "V8KJ89LFjD8",
+      "title": "Shabazz Palaces - Full Performance (Live on KEXP)",
+      "display_title": "Shabazz Palaces — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=V8KJ89LFjD8",
+      "section": "live",
+      "genre": "hip-hop",
+      "published": "2026-11-06T16:00:24Z"
+    },
+    {
+      "id": "R39hGT1iM7w",
+      "title": "Robyn: Tiny Desk Concert",
+      "display_title": "Robyn — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=R39hGT1iM7w",
+      "section": "live",
+      "genre": "pop",
+      "published": "2026-11-12T10:00:34Z"
+    },
+    {
+      "id": "4Nym4a5d9_w",
+      "title": "INOHA on Audiotree Live (Full Session)",
+      "display_title": "INOHA — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=4Nym4a5d9_w",
+      "section": "live",
+      "genre": "indie rock",
+      "published": "2026-11-09T21:38:12Z"
+    },
+    {
+      "id": "_NEAz1SSKOU",
+      "title": "Joy Oladokun: Live On KCRW",
+      "display_title": "Joy Oladokun — Live on KCRW",
+      "channel": "KCRW",
+      "link": "https://www.youtube.com/watch?v=_NEAz1SSKOU",
+      "section": "live",
+      "genre": "singer-songwriter",
+      "published": "2026-11-11T15:00:10Z"
+    },
+    {
+      "id": "5k942_uXzkA",
+      "title": "CULTURA LIVRE | MAURÍCIO PEREIRA | 07/11/26",
+      "display_title": "MAURÍCIO PEREIRA — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=5k942_uXzkA",
+      "section": "live",
+      "genre": "mpb",
+      "published": "2026-11-07T22:30:07Z"
+    },
+    {
+      "id": "wNppuQneoik",
+      "title": "JPEGMAFIA's \"What's In My Bag?\" | Amoeba Music",
+      "display_title": "JPEGMAFIA — What's In My Bag?",
+      "channel": "Amoeba Music",
+      "link": "https://www.youtube.com/watch?v=wNppuQneoik",
+      "section": "extras",
+      "genre": null,
+      "published": "2026-11-09T17:00:35Z"
+    }
+  ],
+  "warnings": []
+}
