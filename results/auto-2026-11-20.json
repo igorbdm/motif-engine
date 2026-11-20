@@ -1,0 +1,187 @@
+{
+  "schema": 1,
+  "edition_key": "auto-2026-11-20",
+  "request_id": "e26-r1-1b2bd9",
+  "edition_date": "2026-11-20",
+  "window": {
+    "start": "2026-11-13T00:00:00-03:00",
+    "end": "2026-11-20T07:17:02-03:00"
+  },
+  "generated_at": "2026-11-20T10:17:02+00:00",
+  "run": {
+    "id": 44717655113,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/44717655113"
+  },
+  "song_of_the_week": {
+    "artist": "鈴木　勲　トリオ, 鈴木　勲　カルテット",
+    "title": "エブリシング・ハプンズ・トゥー・ミー",
+    "album": "ブロー・アップ",
+    "image": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/80/fe/28/80fe2872-fcd4-b6d1-a60a-4b9185114999/4547366853094.jpg/500x500bb.jpg",
+    "links": {
+      "spotify": "https://open.spotify.com/search/%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C%20%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88%20%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC",
+      "apple_music": "https://music.apple.com/search?term=%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C+%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88+%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC",
+      "youtube_music": "https://music.youtube.com/search?q=%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C+%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88+%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC",
+      "tidal": "https://tidal.com/search?q=%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C+%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88+%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC"
+    },
+    "source": "draw"
+  },
+  "videos": [
+    {
+      "id": "6ivYCIF8lyo",
+      "title": "Sweeping Promises - Full Performance (Live on KEXP)",
+      "display_title": "Sweeping Promises — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=6ivYCIF8lyo",
+      "section": "live",
+      "genre": "post-punk",
+      "country": "US",
+      "views": 18895,
+      "published": "2026-11-19T16:00:10Z"
+    },
+    {
+      "id": "nFMFG14gzug",
+      "title": "Iguana Death Cult - Full Performance (Live on KEXP)",
+      "display_title": "Iguana Death Cult — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=nFMFG14gzug",
+      "section": "live",
+      "genre": "post-punk",
+      "country": "NL",
+      "views": 43364,
+      "published": "2026-11-18T16:00:13Z"
+    },
+    {
+      "id": "EnyEhyR5aDs",
+      "title": "Croz Boyce - Full Performance (Live on KEXP)",
+      "display_title": "Croz Boyce — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=EnyEhyR5aDs",
+      "section": "live",
+      "genre": "electronic",
+      "country": "US",
+      "views": 18087,
+      "published": "2026-11-17T16:00:14Z"
+    },
+    {
+      "id": "lhUZYnTaVQk",
+      "title": "Jonathan Hultén - Full Performance (Live on KEXP)",
+      "display_title": "Jonathan Hultén — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=lhUZYnTaVQk",
+      "section": "live",
+      "genre": "indie rock",
+      "country": "SE",
+      "views": 91142,
+      "published": "2026-11-16T16:00:01Z"
+    },
+    {
+      "id": "z2bJQRhZze0",
+      "title": "Chelsea Wolfe - Full Performance (Live on KEXP)",
+      "display_title": "Chelsea Wolfe — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=z2bJQRhZze0",
+      "section": "live",
+      "genre": "singer-songwriter",
+      "country": "US",
+      "views": 214503,
+      "published": "2026-11-13T16:00:11Z"
+    },
+    {
+      "id": "r5W4W6aWw_M",
+      "title": "Mike D: Tiny Desk Concert",
+      "display_title": "Mike D — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=r5W4W6aWw_M",
+      "section": "live",
+      "genre": "hip hop",
+      "country": "US",
+      "views": 617,
+      "published": "2026-11-20T10:00:06Z"
+    },
+    {
+      "id": "wAhBFC9mDkg",
+      "title": "Tove Lo: Tiny Desk Concert",
+      "display_title": "Tove Lo — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=wAhBFC9mDkg",
+      "section": "live",
+      "genre": "dance-pop",
+      "country": "SE",
+      "views": 916478,
+      "published": "2026-11-18T10:00:18Z"
+    },
+    {
+      "id": "DZ4-X4T7qyw",
+      "title": "Gracie's Corner: Tiny Desk Concert",
+      "display_title": "Gracie's Corner — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=DZ4-X4T7qyw",
+      "section": "live",
+      "genre": null,
+      "country": null,
+      "views": 403372,
+      "published": "2026-11-16T10:00:10Z"
+    },
+    {
+      "id": "OfEZMLhHtp4",
+      "title": "Crossing i's Dotting t's on Audiotree Live (Full Session)",
+      "display_title": "Crossing i's Dotting t's — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=OfEZMLhHtp4",
+      "section": "live",
+      "genre": "grunge",
+      "country": "US",
+      "views": 5433,
+      "published": "2026-11-18T18:00:06Z"
+    },
+    {
+      "id": "D9x4b3Y-_G8",
+      "title": "Radio Free Alice on Audiotree Live (Full Session)",
+      "display_title": "Radio Free Alice — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=D9x4b3Y-_G8",
+      "section": "live",
+      "genre": "electronic",
+      "country": "AU",
+      "views": 6009,
+      "published": "2026-11-16T18:00:06Z"
+    },
+    {
+      "id": "m8hyyEd3qZo",
+      "title": "untitled (halo): Live on KCRW",
+      "display_title": "untitled (halo) — Live on KCRW",
+      "channel": "KCRW",
+      "link": "https://www.youtube.com/watch?v=m8hyyEd3qZo",
+      "section": "live",
+      "genre": "shoegaze",
+      "country": "US",
+      "views": 1734,
+      "published": "2026-11-18T15:00:04Z"
+    },
+    {
+      "id": "wGzoBxpePuQ",
+      "title": "CULTURA LIVRE | JADE BARALDO | 14/11/2026",
+      "display_title": "JADE BARALDO — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=wGzoBxpePuQ",
+      "section": "live",
+      "genre": "latin",
+      "country": "BR",
+      "views": 4868,
+      "published": "2026-11-14T22:30:06Z"
+    },
+    {
+      "id": "65ERXfXPZ1Y",
+      "title": "Chelsea Wolfe's \"What's In My Bag?\" | Amoeba Music",
+      "display_title": "Chelsea Wolfe — What's In My Bag?",
+      "channel": "Amoeba Music",
+      "link": "https://www.youtube.com/watch?v=65ERXfXPZ1Y",
+      "section": "extras",
+      "genre": null,
+      "country": null,
+      "views": 174880,
+      "published": "2026-11-16T16:50:07Z"
+    }
+  ],
+  "warnings": []
+}
