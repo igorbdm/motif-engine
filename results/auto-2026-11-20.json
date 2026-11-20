@@ -1,29 +1,29 @@
 {
   "schema": 1,
   "edition_key": "auto-2026-11-20",
-  "request_id": "e26-r1-1b2bd9",
+  "request_id": "e1-r1-45d10c",
   "edition_date": "2026-11-20",
   "window": {
     "start": "2026-11-13T00:00:00-03:00",
-    "end": "2026-11-20T07:17:02-03:00"
+    "end": "2026-11-20T08:46:20-03:00"
   },
-  "generated_at": "2026-11-20T10:17:02+00:00",
+  "generated_at": "2026-11-20T11:46:20+00:00",
   "run": {
-    "id": 44717655113,
-    "url": "https://github.com/igorbdm/motif-engine/actions/runs/44717655113"
+    "id": 44730262797,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/44730262797"
   },
   "song_of_the_week": {
-    "artist": "鈴木　勲　トリオ, 鈴木　勲　カルテット",
-    "title": "エブリシング・ハプンズ・トゥー・ミー",
-    "album": "ブロー・アップ",
-    "image": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/80/fe/28/80fe2872-fcd4-b6d1-a60a-4b9185114999/4547366853094.jpg/500x500bb.jpg",
+    "artist": "jizue",
+    "title": "Trip",
+    "album": "ROOM",
+    "image": "https://coverartarchive.org/release/4bd6bd2e-14d5-40fd-b8cb-e2f1bee55e81/front-500",
     "links": {
-      "spotify": "https://open.spotify.com/search/%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C%20%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88%20%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC",
-      "apple_music": "https://music.apple.com/search?term=%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C+%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88+%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC",
-      "youtube_music": "https://music.youtube.com/search?q=%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C+%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88+%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC",
-      "tidal": "https://tidal.com/search?q=%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%83%88%E3%83%AA%E3%82%AA%2C+%E9%88%B4%E6%9C%A8%E3%80%80%E5%8B%B2%E3%80%80%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88+%E3%82%A8%E3%83%96%E3%83%AA%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%8F%E3%83%97%E3%83%B3%E3%82%BA%E3%83%BB%E3%83%88%E3%82%A5%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%BC"
+      "spotify": "https://open.spotify.com/search/jizue%20Trip",
+      "apple_music": "https://music.apple.com/us/album/trip/1383053240?i=1383053249",
+      "youtube_music": "https://music.youtube.com/watch?v=uMAAVDGQ0p4",
+      "tidal": "https://tidal.com/search?q=jizue+Trip"
     },
-    "source": "draw"
+    "source": "manual"
   },
   "videos": [
     {
@@ -35,7 +35,7 @@
       "section": "live",
       "genre": "post-punk",
       "country": "US",
-      "views": 18895,
+      "views": 19640,
       "published": "2026-11-19T16:00:10Z"
     },
     {
@@ -47,7 +47,7 @@
       "section": "live",
       "genre": "post-punk",
       "country": "NL",
-      "views": 43364,
+      "views": 43653,
       "published": "2026-11-18T16:00:13Z"
     },
     {
@@ -59,7 +59,7 @@
       "section": "live",
       "genre": "electronic",
       "country": "US",
-      "views": 18087,
+      "views": 18140,
       "published": "2026-11-17T16:00:14Z"
     },
     {
@@ -71,7 +71,7 @@
       "section": "live",
       "genre": "indie rock",
       "country": "SE",
-      "views": 91142,
+      "views": 91587,
       "published": "2026-11-16T16:00:01Z"
     },
     {
@@ -83,7 +83,7 @@
       "section": "live",
       "genre": "singer-songwriter",
       "country": "US",
-      "views": 214503,
+      "views": 214890,
       "published": "2026-11-13T16:00:11Z"
     },
     {
@@ -95,7 +95,7 @@
       "section": "live",
       "genre": "hip hop",
       "country": "US",
-      "views": 617,
+      "views": 2979,
       "published": "2026-11-20T10:00:06Z"
     },
     {
@@ -107,7 +107,7 @@
       "section": "live",
       "genre": "dance-pop",
       "country": "SE",
-      "views": 916478,
+      "views": 931467,
       "published": "2026-11-18T10:00:18Z"
     },
     {
@@ -119,7 +119,7 @@
       "section": "live",
       "genre": null,
       "country": null,
-      "views": 403372,
+      "views": 405424,
       "published": "2026-11-16T10:00:10Z"
     },
     {
@@ -143,7 +143,7 @@
       "section": "live",
       "genre": "electronic",
       "country": "AU",
-      "views": 6009,
+      "views": 6078,
       "published": "2026-11-16T18:00:06Z"
     },
     {
@@ -167,7 +167,7 @@
       "section": "live",
       "genre": "latin",
       "country": "BR",
-      "views": 4868,
+      "views": 4870,
       "published": "2026-11-14T22:30:06Z"
     },
     {
@@ -179,7 +179,7 @@
       "section": "extras",
       "genre": null,
       "country": null,
-      "views": 174880,
+      "views": 175621,
       "published": "2026-11-16T16:50:07Z"
     }
   ],
