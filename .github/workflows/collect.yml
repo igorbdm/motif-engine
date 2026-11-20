@@ -43,8 +43,7 @@ jobs:
     timeout-minutes: 15
     env:
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-      LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
-      LASTFM_USERNAME: igor8
+      LISTENBRAINZ_USERNAME: igorbdm
       # Os parâmetros entram como variáveis de ambiente, nunca no texto dos comandos.
       EDITION_KEY: ${{ inputs.edition_key }}
       REQUEST_ID: ${{ inputs.request_id }}

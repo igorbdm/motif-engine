@@ -1,4 +1,4 @@
-"""Escolhe a Song of the Week a partir do que foi ouvido no Last.fm.
+"""Escolhe a Song of the Week a partir do que foi ouvido no ListenBrainz.
 
 Como funciona:
 1. Busca as músicas mais ouvidas dos últimos 7 dias.
@@ -9,8 +9,8 @@ Como funciona:
 4. Fica com as 10 mais ouvidas que sobraram e sorteia uma delas. Músicas
    com mais plays têm um pouco mais de chance: o peso é a raiz quadrada dos
    plays (4 plays pesam 2x mais que 1 play, e não 4x).
-5. Se a semana não tiver nenhuma música nova, tenta o último mês. Se ainda
-   assim não houver, a seção não aparece nessa edição.
+5. Se a semana não tiver nenhuma música nova, tenta os últimos 30 dias. Se
+   ainda assim não houver, a seção não aparece nessa edição.
 
 O histórico vem do CMS a cada execução (é ele quem registra a música quando
 a edição é enviada aos assinantes) e chega aqui como uma lista de
@@ -20,17 +20,23 @@ Escolha manual: se o CMS mandar uma música escolhida no painel
 ({"artist", "title"}), o sorteio não acontece e ela vale mesmo que já tenha
 sido recomendada ou seja de um artista recente (o CMS já avisou isso). O
 motor só busca álbum, capa e links.
+
+Álbum e capa vêm da própria música ouvida no ListenBrainz (correspondência
+com o MusicBrainz e o Cover Art Archive). Sem capa ali, o motor procura no
+iTunes.
 """
 
 import os
 import random
+import time
 
-import lastfm
+import itunes
+import listenbrainz
 from streaming_links import get_streaming_links
 
 CANDIDATES = 10
 RECENT_ARTIST_EDITIONS = 4
-PERIODS = ["7day", "1month"]
+PERIODS = [7, 30]  # dias
 
 
 def song_key(artist, title):
@@ -77,22 +83,39 @@ def get_song_of_the_week(history, username=None, rng=random, choice=None):
     """Retorna {"artist", "title", "album", "image", "links", "source"} ou None.
 
     source é "manual" (escolhida no CMS) ou "draw" (sorteada). Qualquer
-    problema com o Last.fm é avisado no log, mas não impede o envio da
+    problema com o ListenBrainz é avisado no log, mas não impede o envio da
     newsletter: a edição sai sem a seção (ou, na escolha manual, sem capa).
     """
+    username = username or os.environ.get("LISTENBRAINZ_USERNAME")
+    now = int(time.time())
+
+    def recent_tracks():
+        listens = listenbrainz.get_listens(username, now - PERIODS[-1] * 86400)
+        return {days: listenbrainz.top_tracks(listens, now - days * 86400) for days in PERIODS}
+
     if choice:
         print(f"Song of the Week escolhida no CMS: {choice['artist']} — {choice['title']}.")
-        return describe_track(choice, "manual")
+        track = {"artist": choice["artist"], "title": choice["title"], "album": None, "image": None}
+        if username:
+            # A música foi ouvida nos últimos dias: o álbum e a capa vêm de lá.
+            try:
+                wanted = song_key(track["artist"], track["title"])
+                for listened in recent_tracks()[PERIODS[-1]]:
+                    if song_key(listened["artist"], listened["title"]) == wanted:
+                        track.update(album=listened["album"], image=listened["image"])
+                        break
+            except Exception as error:
+                print(f"Não foi possível consultar o ListenBrainz ({error}).")
+        return describe_track(track, "manual")
 
-    username = username or os.environ.get("LASTFM_USERNAME")
-
-    if not username or not os.environ.get("LASTFM_API_KEY"):
-        print("Last.fm não configurado (LASTFM_USERNAME/LASTFM_API_KEY). Edição sem Song of the Week.")
+    if not username:
+        print("ListenBrainz não configurado (LISTENBRAINZ_USERNAME). Edição sem Song of the Week.")
         return None
 
     try:
+        tracks_by_period = recent_tracks()
         for period in PERIODS:
-            track = choose_track(lastfm.get_top_tracks(username, period=period), history, rng)
+            track = choose_track(tracks_by_period[period], history, rng)
             if track:
                 break
         else:
@@ -110,17 +133,24 @@ def describe_track(track, source):
 
     get_streaming_links nunca falha: na pior hipótese, devolve links de busca.
     """
-    try:
-        info = lastfm.get_track_info(track["artist"], track["title"])
-    except Exception as error:
-        print(f"Álbum e capa não encontrados no Last.fm ({error}). A música vai sem eles.")
-        info = {"album": None, "image": None}
+    album, image = track.get("album"), track.get("image")
+
+    if not image:
+        try:
+            info = itunes.get_track_info(track["artist"], track["title"])
+            if info["image"]:
+                album, image = info["album"], info["image"]
+        except Exception as error:
+            print(f"Capa não encontrada no iTunes ({error}).")
+
+    if not image:
+        print("Capa não encontrada. A música vai sem ela.")
 
     return {
         "artist": track["artist"],
         "title": track["title"],
-        "album": info["album"],
-        "image": info["image"],
+        "album": album,
+        "image": image,
         "links": get_streaming_links(track["artist"], track["title"]),
         "source": source,
     }

@@ -13,6 +13,7 @@ Parâmetros (variáveis de ambiente, preenchidas pelo workflow):
                 anterior, sete dias antes, no horário de São Paulo
   ENGINE_STATE  JSON com o estado guardado no CMS:
                 {"song_history": [{"artist", "title"}], "genre_overrides": {"artista": "gênero"},
+                 "country_overrides": {"artista": "BR"} (país vazio esconde a bandeira),
                  "song_choice": {"artist", "title"} (opcional: Song of the Week escolhida
                  no CMS; sem ela, a música é sorteada)}
 """
@@ -25,7 +26,8 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from channels import CHANNELS
-from collector import get_feed
+from collector import fetch_video_views, get_feed
+from countries import add_countries
 from genres import add_genres
 from song_of_the_week import get_song_of_the_week
 from titles import add_display_titles
@@ -83,6 +85,11 @@ def read_parameters(environ=None):
         for artist, genre in (state.get("genre_overrides") or {}).items()
     }
 
+    country_overrides = {
+        str(artist): str(country or "").strip().upper()
+        for artist, country in (state.get("country_overrides") or {}).items()
+    }
+
     choice = state.get("song_choice")
     if isinstance(choice, dict) and str(choice.get("artist") or "").strip() and str(choice.get("title") or "").strip():
         choice = {"artist": str(choice["artist"]).strip(), "title": str(choice["title"]).strip()}
@@ -96,6 +103,7 @@ def read_parameters(environ=None):
         "since": since,
         "song_history": history,
         "genre_overrides": overrides,
+        "country_overrides": country_overrides,
         "song_choice": choice,
     }
 
@@ -110,8 +118,23 @@ def video_entry(video):
         "link": video["link"],
         "section": video.get("section", "live"),
         "genre": video.get("genre"),
+        "country": video.get("country"),
+        "views": video.get("views"),
         "published": video["published"],
     }
+
+
+def add_views(videos, warnings):
+    """Visualizações de cada vídeo na hora da coleta. Uma falha não impede a edição."""
+    try:
+        views = fetch_video_views([video["video_id"] for video in videos if video.get("video_id")])
+    except Exception as error:
+        print(f"Não foi possível buscar as visualizações: {error}.")
+        warnings.append("Visualizações dos vídeos indisponíveis: o site mantém a ordem do e-mail.")
+        views = {}
+
+    for video in videos:
+        video["views"] = views.get(video.get("video_id"))
 
 
 def collect(parameters):
@@ -122,6 +145,8 @@ def collect(parameters):
     warnings = []
     if videos:
         add_genres(videos, CHANNELS, overrides=parameters["genre_overrides"])
+        add_countries(videos, CHANNELS, overrides=parameters.get("country_overrides"))
+        add_views(videos, warnings)
         add_display_titles(videos, CHANNELS)
     else:
         warnings.append("Nenhum vídeo novo encontrado nos canais acompanhados.")

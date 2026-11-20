@@ -1,14 +1,14 @@
-"""Links da Song of the Week no Spotify, Apple Music e YouTube Music.
+"""Links da Song of the Week no Spotify, Apple Music, YouTube Music e Tidal.
 
 - Apple Music: busca da Apple (iTunes Search API), que não pede chave.
 - YouTube Music: busca na API do YouTube (a mesma chave dos vídeos),
   procurando a faixa oficial publicada no canal "Artista - Topic".
-- Spotify: link de busca. A API do Spotify pede um app próprio, com
-  credenciais, e por enquanto não vale o trabalho.
+- Spotify e Tidal: link de busca. As APIs dos dois pedem um app próprio,
+  com credenciais, e por enquanto não vale o trabalho.
 
 Quando a busca falha ou o resultado não é a mesma música (versão ao vivo,
 cover, outro artista), o link daquela plataforma vira um link de busca.
-Assim os três links sempre aparecem e nenhum erro impede o envio.
+Assim os quatro links sempre aparecem e nenhum erro impede o envio.
 """
 
 import os
@@ -42,6 +42,7 @@ def search_links(artist, title):
         "spotify": f"https://open.spotify.com/search/{quote(term)}",
         "apple_music": f"https://music.apple.com/search?term={quote_plus(term)}",
         "youtube_music": f"https://music.youtube.com/search?q={quote_plus(term)}",
+        "tidal": f"https://tidal.com/search?q={quote_plus(term)}",
     }
 
 
@@ -97,7 +98,7 @@ def find_youtube_music(artist, title):
 
 
 def get_streaming_links(artist, title):
-    """Retorna {"spotify", "apple_music", "youtube_music"}, sempre com os três."""
+    """Retorna {"spotify", "apple_music", "youtube_music", "tidal"}, sempre com os quatro."""
     links = search_links(artist, title)
 
     for platform, find in [("apple_music", find_apple_music), ("youtube_music", find_youtube_music)]:

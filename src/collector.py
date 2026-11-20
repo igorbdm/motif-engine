@@ -131,6 +131,41 @@ def fetch_video_topics(video_ids):
     return topics
 
 
+def fetch_video_views(video_ids):
+    """Visualizações de vários vídeos no momento da coleta ({id: número}).
+
+    O CMS usa o número para ordenar as sessões na página da edição no site.
+    Lotes de 50 IDs por chamada (cada chamada custa 1 unidade da cota).
+    """
+    if not video_ids:
+        return {}
+
+    if not YOUTUBE_API_KEY:
+        raise RuntimeError(
+            "A variável YOUTUBE_API_KEY não foi configurada. "
+            "Veja o README para saber como criar e configurar a chave."
+        )
+
+    views = {}
+
+    for start in range(0, len(video_ids), 50):
+        params = {
+            "part": "statistics",
+            "id": ",".join(video_ids[start:start + 50]),
+            "key": YOUTUBE_API_KEY,
+        }
+
+        response = requests.get(VIDEO_API_URL, params=params, timeout=30)
+        response.raise_for_status()
+
+        for item in response.json().get("items", []):
+            count = item.get("statistics", {}).get("viewCount")
+            if count is not None:
+                views[item["id"]] = int(count)
+
+    return views
+
+
 def get_feed(channel_name, config, since=None):
     playlist_id = get_uploads_playlist_id(config["id"])
     min_duration = config.get("min_duration")

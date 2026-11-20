@@ -7,13 +7,14 @@ Como funciona:
    correções são feitas no CMS e chegam a cada execução. Um gênero vazio
    ("") esconde o selo daquele artista.
 3. Senão, usa o gênero já descoberto em semanas anteriores
-   (data/artist_genres.json) ou pergunta ao Last.fm.
+   (data/artist_genres.json) ou pergunta ao MusicBrainz.
 4. Se nada disso der certo, usa a categoria do vídeo no YouTube, que é mais
    genérica ("rock", "jazz", "pop").
 
-No Last.fm, as marcações são feitas pelos usuários e vêm misturadas com
-ruído ("seen live", "brazilian", "saxophone"). Por isso uma marcação só vale
-se contiver uma palavra de gênero conhecida (GENRE_WORDS).
+No MusicBrainz, as marcações (tags) são votadas pelos usuários e vêm
+misturadas com ruído ("american", "seen live", "saxophone"). Por isso uma
+marcação só vale se contiver uma palavra de gênero conhecida (GENRE_WORDS).
+Vale a mais votada.
 
 Os vídeos do Beyond the Stage (section "extras") não levam selo.
 
@@ -21,20 +22,19 @@ Qualquer problema é avisado no log e o vídeo simplesmente fica sem selo.
 """
 
 import json
-import os
 import re
 import unicodedata
 from pathlib import Path
 
 import collector
-import lastfm
+import musicbrainz
 from titles import extract_artist
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 CACHE_PATH = DATA_DIR / "artist_genres.json"
 
-# Marcações com peso menor que isso (de 0 a 100) são pouco confiáveis.
-MIN_TAG_WEIGHT = 5
+# Marcações sem votos (ou com mais votos contra que a favor) não valem.
+MIN_TAG_WEIGHT = 1
 
 GENRE_WORDS = {
     # rock, pop e derivados
@@ -125,14 +125,15 @@ def artist_candidates(name):
     return candidates
 
 
-def genre_from_lastfm(artist):
+def genre_from_musicbrainz(artist):
+    """Gênero do artista, ou None. Lança musicbrainz.Unavailable se o MusicBrainz estiver fora."""
     for candidate in artist_candidates(artist):
-        try:
-            genre = pick_genre(lastfm.get_artist_tags(candidate))
-        except Exception as error:
-            print(f"Last.fm sem dados para {candidate} ({error}).")
+        item = musicbrainz.find_artist(candidate)
+        if not item:
             continue
 
+        tags = sorted(item.get("tags", []), key=lambda tag: int(tag.get("count") or 0), reverse=True)
+        genre = pick_genre([(tag["name"], int(tag.get("count") or 0)) for tag in tags])
         if genre:
             return genre
 
@@ -171,7 +172,7 @@ def add_genres(videos, channels, overrides=None, cache_path=CACHE_PATH):
         print(f"Não foi possível ler os arquivos de gêneros: {error}. Vídeos sem selo de gênero.")
         return
 
-    use_lastfm = bool(os.environ.get("LASTFM_API_KEY"))
+    use_musicbrainz = True
     cache_changed = False
     not_found = set()
     needs_youtube = []
@@ -198,8 +199,17 @@ def add_genres(videos, channels, overrides=None, cache_path=CACHE_PATH):
                 video["genre"] = cache[key]
                 continue
 
-            if use_lastfm and key not in not_found:
-                genre = genre_from_lastfm(artist)
+            if use_musicbrainz and key not in not_found:
+                try:
+                    genre = genre_from_musicbrainz(artist)
+                except musicbrainz.Unavailable as error:
+                    # Fora do ar: não insiste nos outros artistas desta coleta.
+                    print(f"MusicBrainz indisponível ({error}). Os gêneros restantes vêm do YouTube.")
+                    use_musicbrainz = False
+                    genre = None
+                except Exception as error:
+                    print(f"Gênero de {artist} não encontrado no MusicBrainz ({error}).")
+                    genre = None
                 if genre:
                     cache[key] = genre
                     cache_changed = True
