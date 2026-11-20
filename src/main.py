@@ -12,7 +12,7 @@ Parâmetros (variáveis de ambiente, preenchidas pelo workflow):
   SINCE         início da coleta (ISO 8601); padrão: meia-noite da edição
                 anterior, sete dias antes, no horário de São Paulo
   ENGINE_STATE  JSON com o estado guardado no CMS:
-                {"song_history": [{"artist", "title"}], "genre_overrides": {"artista": "gênero"},
+                {"song_history": [{"artist", "title"}], "genre_overrides": {"artista": "gênero, gênero, gênero"},
                  "country_overrides": {"artista": "BR"} (país vazio esconde a bandeira),
                  "song_choice": {"artist", "title"} (opcional: Song of the Week escolhida
                  no CMS; sem ela, a música é sorteada)}
@@ -118,6 +118,7 @@ def video_entry(video):
         "link": video["link"],
         "section": video.get("section", "live"),
         "genre": video.get("genre"),
+        "genres": video.get("genres") or [],
         "country": video.get("country"),
         "views": video.get("views"),
         "published": video["published"],

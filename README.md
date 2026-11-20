@@ -1,7 +1,7 @@
 # Motif Engine
 
 Motor de coleta da Music Weekly. Busca as performances da semana nos canais
-acompanhados do YouTube, descobre o gênero e o país de origem de cada artista e escolhe a Song of
+acompanhados do YouTube, descobre até três gêneros e o país de origem de cada artista e escolhe a Song of
 the Week no ListenBrainz. **Não envia e-mails**: quem monta, revisa e envia a edição
 é o CMS da Motif (repositório `motif-site`).
 
@@ -23,10 +23,14 @@ títulos, gêneros e regras da Song of the Week).
 
 O formato do resultado é o contrato `schema: 1`, o mesmo de
 `modules/motif-newsletter/data/sample-edition.json` no `motif-site`:
-`song_of_the_week` (ou `null`; `source` é `manual` ou `draw`), `videos` (`section` `live` ou `extras`,
-`genre` ou `null`, `country` — código ISO de duas letras, ex. `BR` — ou `null`; `views` — visualizações na hora da coleta, ou `null`;
-`links` da Song of the Week: `spotify`, `apple_music`, `youtube_music`, `tidal`), mais `edition_key`, `request_id`, `window`, `run` e
-`warnings`.
+
+- `song_of_the_week`: `{artist, title, album, image, links, source}` ou `null`. `source` é `manual`
+  (escolhida no CMS) ou `draw` (sorteada); `links` traz `spotify`, `apple_music`, `youtube_music` e `tidal`.
+- `videos`: cada um com `section` (`live` ou `extras`); `genres`, lista com até três gêneros (as tags mais
+  votadas no MusicBrainz, sem repetir; `[]` se não houver); `genre`, o primeiro deles ou `null` (mantido para
+  quem lê o formato antigo); `country`, código ISO de duas letras (ex. `BR`) ou `null`; `views`, visualizações
+  na hora da coleta, ou `null`.
+- `edition_key`, `request_id`, `window` (`start` e `end` da coleta), `run` e `warnings`.
 
 ## Configuração no GitHub
 
@@ -59,13 +63,14 @@ EDITION_KEY=local-test REQUEST_ID=local-1 YOUTUBE_API_KEY=… LISTENBRAINZ_USERN
 | `src/channels.py` | Canais acompanhados e seus filtros |
 | `src/collector.py` | Busca os vídeos no YouTube |
 | `src/titles.py` | Título padronizado "Artista — Programa" |
-| `src/genres.py` | Gênero do artista (correções do CMS, cache, MusicBrainz, YouTube) |
+| `src/genres.py` | Até três gêneros do artista (correções do CMS com gêneros separados por vírgula, cache, MusicBrainz, YouTube) |
 | `src/song_of_the_week.py` | Sorteio da Song of the Week |
 | `src/listenbrainz.py` | Músicas ouvidas no ListenBrainz (plays, álbum e capa) |
 | `src/itunes.py` | Álbum e capa no iTunes, quando o ListenBrainz não tem a capa |
 | `src/musicbrainz.py` | Acesso ao MusicBrainz (uma consulta por segundo), usado por gênero e origem |
 | `src/countries.py` | País de origem do artista (correções do CMS, cache, MusicBrainz) |
 | `src/streaming_links.py` | Links do Spotify, Apple Music, YouTube Music e Tidal |
-| `data/artist_genres.json` | Cache dos gêneros descobertos (atualizado pelo workflow) |
+| `src/utils.py` | Datas do feed do YouTube com fuso horário |
+| `data/artist_genres.json` | Cache dos gêneros descobertos, uma lista por artista (atualizado pelo workflow; entradas antigas com um gênero só são consultadas de novo) |
 | `data/artist_countries.json` | Cache das origens descobertas (atualizado pelo workflow; vazio = não encontrado) |
 | `results/` | Um JSON por edição coletada |

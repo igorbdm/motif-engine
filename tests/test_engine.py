@@ -569,14 +569,53 @@ class GenreTests(unittest.TestCase):
         self.add_genres([video], musicbrainz={"return_value": artist})
 
         self.assertEqual(video["genre"], "shoegaze")
-        self.assertEqual(genres.load_json(self.cache_path), {"wednesday": "shoegaze"})
+        self.assertEqual(video["genres"], ["shoegaze", "indie rock"])
+        self.assertEqual(genres.load_json(self.cache_path), {"wednesday": ["shoegaze", "indie rock"]})
 
     def test_cached_genre_skips_musicbrainz(self):
         video = self.video()
-        find_artist = self.add_genres([video], cache={"wednesday": "indie rock"})
+        find_artist = self.add_genres([video], cache={"wednesday": ["indie rock", "shoegaze"]})
 
+        self.assertEqual(video["genres"], ["indie rock", "shoegaze"])
         self.assertEqual(video["genre"], "indie rock")
         find_artist.assert_not_called()
+
+    def test_old_single_genre_cache_is_refreshed_from_musicbrainz(self):
+        import genres
+
+        video = self.video()
+        artist = {"name": "Wednesday", "tags": [{"name": "indie rock", "count": 4}, {"name": "alt-country", "count": 3}]}
+        self.add_genres([video], cache={"wednesday": "indie rock"}, musicbrainz={"return_value": artist})
+
+        self.assertEqual(video["genres"], ["indie rock", "alt-country"])
+        self.assertEqual(genres.load_json(self.cache_path), {"wednesday": ["indie rock", "alt-country"]})
+
+    def test_old_single_genre_cache_is_kept_when_musicbrainz_is_down(self):
+        import genres
+
+        video = self.video()
+        self.add_genres(
+            [video],
+            cache={"wednesday": "indie rock"},
+            musicbrainz={"side_effect": genres.musicbrainz.Unavailable("HTTP 503")},
+        )
+
+        self.assertEqual(video["genres"], ["indie rock"])
+
+    def test_up_to_three_genres_most_voted_without_repeating(self):
+        from genres import pick_genres
+
+        self.assertEqual(pick_genres([
+            ("alternative hip hop", 2), ("hip hop", 1), ("experimental hip hop", 1), ("seen live", 9),
+        ]), ["alternative hip hop", "experimental hip hop"])
+        self.assertEqual(pick_genres([
+            ("indie rock", 8), ("post-punk", 6), ("post-punk revival", 5), ("art rock", 1), ("dream pop", 1),
+        ]), ["indie rock", "post-punk", "dream pop"])
+        # No empate, a mais específica: "rock" não entra depois de "alternative rock".
+        self.assertEqual(pick_genres([
+            ("singer-songwriter", 4), ("rock", 2), ("alternative rock", 2), ("gothic rock", 2), ("darkwave", 1),
+        ]), ["singer-songwriter", "alternative rock", "gothic rock"])
+        self.assertEqual(pick_genres([("french", 9)]), [])
 
     def test_musicbrainz_outage_falls_back_to_youtube_without_insisting(self):
         import genres
@@ -596,12 +635,14 @@ class GenreTests(unittest.TestCase):
         corrected, hidden = self.video("Wednesday"), self.video("Rostam")
         self.add_genres(
             [corrected, hidden],
-            overrides={"WEDNESDAY": "indie rock", "Rostam": ""},
-            cache={"wednesday": "shoegaze"},
+            overrides={"WEDNESDAY": "indie rock, Alt-Country, slowcore, emo", "Rostam": ""},
+            cache={"wednesday": ["shoegaze"]},
             youtube={"return_value": {"abc": ["https://en.wikipedia.org/wiki/Pop_music"]}},
         )
 
+        self.assertEqual(corrected["genres"], ["indie rock", "alt-country", "slowcore"])
         self.assertEqual(corrected["genre"], "indie rock")
+        self.assertEqual(hidden["genres"], [])
         self.assertIsNone(hidden["genre"])
 
     def test_youtube_topic_is_the_fallback(self):
@@ -612,6 +653,7 @@ class GenreTests(unittest.TestCase):
         ]}})
 
         self.assertEqual(video["genre"], "rock")
+        self.assertEqual(video["genres"], ["rock"])
 
     def test_failures_leave_videos_without_badge(self):
         video = self.video()
@@ -937,10 +979,10 @@ class MainTests(unittest.TestCase):
         self.assertEqual(result["warnings"], [])
         self.assertEqual(result["videos"], [
             {"id": "a", "title": "Wednesday - Full Performance (Live on KEXP)", "display_title": "Wednesday — Live on KEXP",
-             "channel": "KEXP", "link": "https://www.youtube.com/watch?v=a", "section": "live", "genre": "slowcore",
+             "channel": "KEXP", "link": "https://www.youtube.com/watch?v=a", "section": "live", "genre": "slowcore", "genres": ["slowcore"],
              "country": "US", "views": 1200, "published": "2026-08-22T10:00:00Z"},
             {"id": "b", "title": "Daniel Lanois | What's in My Bag?", "display_title": "Daniel Lanois — What's In My Bag?",
-             "channel": "Amoeba Music", "link": "https://www.youtube.com/watch?v=b", "section": "extras", "genre": None,
+             "channel": "Amoeba Music", "link": "https://www.youtube.com/watch?v=b", "section": "extras", "genre": None, "genres": [],
              "country": None, "views": 300, "published": "2026-08-23T10:00:00Z"},
         ])
 

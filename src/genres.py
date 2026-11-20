@@ -1,20 +1,26 @@
-"""Descobre o gênero musical do artista de cada vídeo.
+"""Descobre os gêneros musicais (até três) do artista de cada vídeo.
 
 Como funciona:
 1. Acha o nome do artista no título do vídeo, usando os padrões de cada
    canal ("artist_patterns" em channels.py).
-2. Se o artista estiver nas correções de gênero, usa o gênero de lá. As
-   correções são feitas no CMS e chegam a cada execução. Um gênero vazio
-   ("") esconde o selo daquele artista.
-3. Senão, usa o gênero já descoberto em semanas anteriores
+2. Se o artista estiver nas correções de gênero, usa os gêneros de lá. As
+   correções são feitas no CMS e chegam a cada execução, com até três gêneros
+   separados por vírgula ("post-punk, indie rock"). Uma correção vazia ("")
+   esconde os selos daquele artista.
+3. Senão, usa os gêneros já descobertos em semanas anteriores
    (data/artist_genres.json) ou pergunta ao MusicBrainz.
 4. Se nada disso der certo, usa a categoria do vídeo no YouTube, que é mais
-   genérica ("rock", "jazz", "pop").
+   genérica ("rock", "jazz", "pop"): um gênero só.
 
 No MusicBrainz, as marcações (tags) são votadas pelos usuários e vêm
 misturadas com ruído ("american", "seen live", "saxophone"). Por isso uma
 marcação só vale se contiver uma palavra de gênero conhecida (GENRE_WORDS).
-Vale a mais votada.
+Valem as três mais votadas (no empate, a mais específica, isto é, a de nome
+mais longo), sem repetir o que já foi escolhido: "hip hop" não entra depois
+de "alternative hip hop", nem "post-punk revival" depois de "post-punk".
+
+Cada vídeo recebe video["genres"] (lista, até três) e video["genre"] (o
+primeiro, ou None), mantido para quem lê o formato antigo.
 
 Os vídeos do Beyond the Stage (section "extras") não levam selo.
 
@@ -35,6 +41,9 @@ CACHE_PATH = DATA_DIR / "artist_genres.json"
 
 # Marcações sem votos (ou com mais votos contra que a favor) não valem.
 MIN_TAG_WEIGHT = 1
+
+# Quantos gêneros cada artista leva no máximo.
+MAX_GENRES = 3
 
 GENRE_WORDS = {
     # rock, pop e derivados
@@ -95,12 +104,45 @@ def is_genre(tag):
     return any(f" {genre} " in words for genre in GENRE_WORDS)
 
 
+def overlaps(a, b):
+    """Uma marcação repete a outra quando uma contém a outra ("hip hop" e "alternative hip hop").
+    "r&b" e "rnb" são a mesma coisa."""
+    a, b = (f" {normalize(x).replace('r&b', 'rnb')} " for x in (a, b))
+    return a in b or b in a
+
+
+def pick_genres(tags, limit=MAX_GENRES):
+    """Até `limit` marcações que são gêneros: as mais votadas, a mais específica no empate, sem repetir."""
+    candidates = [
+        (name.strip().casefold(), weight)
+        for name, weight in tags
+        # "alternative/indie rock" é um agrupamento do MusicBrainz, não um gênero.
+        if weight >= MIN_TAG_WEIGHT and is_genre(name) and "/" not in name
+    ]
+    candidates.sort(key=lambda item: (-item[1], -len(item[0])))
+    chosen = []
+    for name, _ in candidates:
+        if not any(overlaps(name, other) for other in chosen):
+            chosen.append(name)
+        if len(chosen) == limit:
+            break
+    return chosen
+
+
 def pick_genre(tags):
-    """Primeira marcação (da mais para a menos usada) que é um gênero."""
-    for name, weight in tags:
-        if weight >= MIN_TAG_WEIGHT and is_genre(name):
-            return name.strip().casefold()
-    return None
+    """A marcação mais votada que é um gênero (ou None)."""
+    genres = pick_genres(tags, limit=1)
+    return genres[0] if genres else None
+
+
+def parse_override(value):
+    """Correção do CMS ("post-punk, indie rock") → lista de até três gêneros; vazio → []."""
+    genres = []
+    for part in str(value or "").split(","):
+        part = part.strip().casefold()
+        if part and part not in genres:
+            genres.append(part)
+    return genres[:MAX_GENRES]
 
 
 def remove_accents(text):
@@ -125,19 +167,18 @@ def artist_candidates(name):
     return candidates
 
 
-def genre_from_musicbrainz(artist):
-    """Gênero do artista, ou None. Lança musicbrainz.Unavailable se o MusicBrainz estiver fora."""
+def genres_from_musicbrainz(artist):
+    """Até três gêneros do artista ([] se não achar). Lança musicbrainz.Unavailable se o MusicBrainz estiver fora."""
     for candidate in artist_candidates(artist):
         item = musicbrainz.find_artist(candidate)
         if not item:
             continue
 
-        tags = sorted(item.get("tags", []), key=lambda tag: int(tag.get("count") or 0), reverse=True)
-        genre = pick_genre([(tag["name"], int(tag.get("count") or 0)) for tag in tags])
-        if genre:
-            return genre
+        genres = pick_genres([(tag["name"], int(tag.get("count") or 0)) for tag in item.get("tags", [])])
+        if genres:
+            return genres
 
-    return None
+    return []
 
 
 def genre_from_youtube_topics(topics):
@@ -163,13 +204,20 @@ def save_json(data, path):
         file.write("\n")
 
 
+def set_genres(video, genres):
+    video["genres"] = list(genres)[:MAX_GENRES]
+    video["genre"] = video["genres"][0] if video["genres"] else None
+
+
 def add_genres(videos, channels, overrides=None, cache_path=CACHE_PATH):
-    """Preenche video["genre"] em cada vídeo (ou None, se não descobrir)."""
+    """Preenche video["genres"] (até três) e video["genre"] (o primeiro, ou None) em cada vídeo."""
     try:
-        overrides = {artist.casefold(): genre for artist, genre in (overrides or {}).items()}
+        overrides = {artist.casefold(): parse_override(genre) for artist, genre in (overrides or {}).items()}
         cache = load_json(cache_path)
     except Exception as error:
         print(f"Não foi possível ler os arquivos de gêneros: {error}. Vídeos sem selo de gênero.")
+        for video in videos:
+            set_genres(video, [])
         return
 
     use_musicbrainz = True
@@ -178,7 +226,7 @@ def add_genres(videos, channels, overrides=None, cache_path=CACHE_PATH):
     needs_youtube = []
 
     for video in videos:
-        video["genre"] = None
+        set_genres(video, [])
 
         # Os vídeos do Beyond the Stage não levam selo de gênero.
         if video.get("section") == "extras":
@@ -191,31 +239,40 @@ def add_genres(videos, channels, overrides=None, cache_path=CACHE_PATH):
             key = artist.casefold()
 
             if key in overrides:
-                # Gênero vazio no arquivo de correções esconde o selo.
-                video["genre"] = overrides[key] or None
+                # Correção vazia esconde os selos.
+                set_genres(video, overrides[key])
                 continue
 
-            if key in cache:
-                video["genre"] = cache[key]
+            cached = cache.get(key)
+            # O cache antigo guardava um gênero só (texto): vale como reserva, mas o
+            # MusicBrainz é consultado de novo para trazer os três.
+            stale = isinstance(cached, str)
+            if isinstance(cached, list) and cached:
+                set_genres(video, cached)
                 continue
 
             if use_musicbrainz and key not in not_found:
                 try:
-                    genre = genre_from_musicbrainz(artist)
+                    genres = genres_from_musicbrainz(artist)
                 except musicbrainz.Unavailable as error:
                     # Fora do ar: não insiste nos outros artistas desta coleta.
                     print(f"MusicBrainz indisponível ({error}). Os gêneros restantes vêm do YouTube.")
                     use_musicbrainz = False
-                    genre = None
+                    genres = []
                 except Exception as error:
                     print(f"Gênero de {artist} não encontrado no MusicBrainz ({error}).")
-                    genre = None
-                if genre:
-                    cache[key] = genre
+                    genres = []
+                if genres:
+                    cache[key] = genres
                     cache_changed = True
-                    video["genre"] = genre
+                    set_genres(video, genres)
                     continue
-                not_found.add(key)
+                if not stale:
+                    not_found.add(key)
+
+            if stale and cached:
+                set_genres(video, [cached])
+                continue
 
         if video.get("video_id"):
             needs_youtube.append(video)
@@ -224,7 +281,8 @@ def add_genres(videos, channels, overrides=None, cache_path=CACHE_PATH):
         try:
             topics = collector.fetch_video_topics([video["video_id"] for video in needs_youtube])
             for video in needs_youtube:
-                video["genre"] = genre_from_youtube_topics(topics.get(video["video_id"], []))
+                genre = genre_from_youtube_topics(topics.get(video["video_id"], []))
+                set_genres(video, [genre] if genre else [])
         except Exception as error:
             print(f"Não foi possível buscar as categorias no YouTube: {error}.")
 
