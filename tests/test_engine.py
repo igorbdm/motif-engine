@@ -469,11 +469,70 @@ class GenreTests(unittest.TestCase):
             ("Amoeba Music", 'Elvis Costello\'s "What\'s In My Bag?" | Amoeba Music', "Elvis Costello — What's In My Bag?"),
             ("Amoeba Music", "Daniel Lanois | What's in My Bag? (Teaser)", "Daniel Lanois — What's In My Bag?"),
             ("Pitchfork", "Audrey Hobert Rates Podcasts, Don Toliver, and Disney Adults | Pitchfork", "Audrey Hobert — Over/Under"),
+            ("Premier Guitar", "Rig Rundown: GA-20", "GA-20 — Rig Rundown"),
+            ("Premier Guitar", "Pavement Rig Rundown", "Pavement — Rig Rundown"),
+            ("Premier Guitar", "Crowbar Rig Rundown with Kirk Windstein, Pat Bruders & Matt Brunson", "Crowbar — Rig Rundown"),
+            ("Premier Guitar", "Marcus King Band Rig Rundown with Drew Smithers [2026]", "Marcus King Band — Rig Rundown"),
+            ("Premier Guitar", "How Geese Get Their Unhinged Live Sound | Rig Rundown", "Geese — Rig Rundown"),
+            ("Premier Guitar", "How Drug Church Gets Their Sound | Rig Rundown", "Drug Church — Rig Rundown"),
+            ("Premier Guitar", "Rig Rundown: Muse's Matt Bellamy & Chris Wolstenholme", "Muse — Rig Rundown"),
+            ("Premier Guitar", "AC/DC's Angus Young & Stevie Young Rig Rundown", "AC/DC — Rig Rundown"),
+            ("Premier Guitar", "Bring Me the Horizon's Lee Malia Rig Rundown", "Bring Me the Horizon — Rig Rundown"),
+            ("Premier Guitar", "The Black Crowes' Rich Robinson Rig Rundown [2026]", "The Black Crowes — Rig Rundown"),
+            ("Premier Guitar", "Hayley Williams' Band Rig Rundown with Joey Howard", "Hayley Williams — Rig Rundown"),
+            ("Premier Guitar", "Rig Rundown: Dinosaur Jr 's J Mascis [2022]", "Dinosaur Jr — Rig Rundown"),
+            ("Premier Guitar", "Your New Favorite Guitarist: Seth Lee Jones Rig Rundown", "Seth Lee Jones — Rig Rundown"),
+            # Apóstrofo que faz parte do nome da banda.
+            ("Premier Guitar", "Jane's Addiction Rig Rundown", "Jane's Addiction — Rig Rundown"),
+            ("Premier Guitar", "Jane's Addiction's Dave Navarro Rig Rundown", "Jane's Addiction — Rig Rundown"),
+            ("Premier Guitar", "Guns N' Roses Rig Rundown", "Guns N' Roses — Rig Rundown"),
+            ("Premier Guitar", "Guns N' Roses' Slash, Duff McKagan & Richard Fortus Rig Rundown", "Guns N' Roses — Rig Rundown"),
+            ("Premier Guitar", "Rig Rundown - Meshuggah's Fredrik Thordendal, Mårten Hagström, & Dick Lövgren", "Meshuggah — Rig Rundown"),
+            ("Guitar Moves", "Gwenifer Raymond | Guitar Moves Interview", "Gwenifer Raymond — Guitar Moves"),
+            ("Guitar Moves", "Marcus King | Guitar Moves interview", "Marcus King — Guitar Moves"),
+            ("Guitar Moves", "Josh Homme of Queens of the Stone Age | Guitar Moves Interview", "Josh Homme — Guitar Moves"),
+            ("Guitar Moves", "Albert Hammond Jr. of The Strokes | Guitar Moves Interview", "Albert Hammond Jr. — Guitar Moves"),
+            ("Guitar Moves", "Slipknot's James Root | Guitar Moves Interview", "James Root — Guitar Moves"),
+            ("Guitar Moves", "Lemmy | Guitar Moves Interview", "Lemmy — Guitar Moves"),
         ]
 
         for channel, title, expected in examples:
             with self.subTest(title=title):
                 self.assertEqual(display_title(title, CHANNELS[channel]), expected)
+
+    def test_guitar_programs_keep_only_full_episodes(self):
+        from channels import CHANNELS
+
+        recent = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+        cases = {
+            "Premier Guitar": {
+                "full": ("Thundercat Rig Rundown", 2400),
+                "short": ("Thundercat Rig Rundown #shorts", 45),
+                "trailer": ("Matt Sweeney's Fingerstyle Approach | Superwolves Rig Rundown Trailer", 700),
+                "list": ("The Top 10 Rig Rundowns of 2025", 1800),
+                "other": ("Fender's Modern Nashville Telecaster", 900),
+            },
+            "Guitar Moves": {
+                "full": ("Gwenifer Raymond | Guitar Moves Interview", 1100),
+                "short": ("Gwenifer Raymond | Guitar Moves Interview #shorts", 40),
+                "clip": ("Matt Sweeney on Jake Bugg's Episode of Guitar Moves", 400),
+            },
+        }
+
+        for channel, uploads in cases.items():
+            with self.subTest(channel=channel):
+                playlist_response = {"items": [
+                    {"snippet": {"title": title, "publishedAt": recent, "resourceId": {"videoId": video_id}}}
+                    for video_id, (title, _) in uploads.items()
+                ]}
+                with patch.object(collector, "fetch_playlist_page", return_value=playlist_response), \
+                    patch.object(collector, "fetch_video_durations", side_effect=lambda ids: {
+                        video_id: uploads[video_id][1] for video_id in ids
+                    }):
+                    feed = collector.get_feed(channel, CHANNELS[channel])
+
+                self.assertEqual([video["video_id"] for video in feed], ["full"])
+                self.assertEqual(feed[0]["section"], "extras")
 
     def test_title_outside_the_pattern_is_kept_as_is(self):
         from channels import CHANNELS

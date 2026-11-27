@@ -7,6 +7,36 @@ LA_BLOGOTHEQUE_FULL_SESSION = (
     r"^(?P<artist>(?:(?!\s-\s)[^|])+?)\s*\|\s*(?P<program>A Take Away Show|Live Session)"
 )
 
+# Nome de pessoa: duas a quatro palavras com inicial maiúscula ("Matt Bellamy",
+# "J Mascis"). Exigir duas evita cortar bandas como "Jane's Addiction".
+_PALAVRA_DE_NOME = r"(?!Rig\b)(?-i:[A-Z])[\w.\-]*"
+_PESSOA = rf"{_PALAVRA_DE_NOME}(?:\s+{_PALAVRA_DE_NOME}){{1,3}}"
+_SEPARADOR_DE_NOMES = r"(?:\s*,\s*(?:&\s*|and\s+)?|\s*&\s*|\s+and\s+)"
+# Na lista, o primeiro pode ter um nome só: "Guns N' Roses' Slash, Duff McKagan".
+_PESSOAS = rf"(?:{_PESSOA}|{_PALAVRA_DE_NOME}(?=\s*[,&]))(?:{_SEPARADOR_DE_NOMES}{_PESSOA})*"
+
+# Rig Rundown: o artista é a banda, não os integrantes citados no título.
+_RIG_INICIO = r"^(?:Rig Rundown\s*[:\-–—]\s*|Your New Favorite Guitarist:\s*)?"
+_RIG_FIM = r"\s*(?:Rig Rundown|\[|\||$)"
+RIG_RUNDOWN_ARTIST_PATTERNS = [
+    # "How Geese Get Their Unhinged Live Sound | Rig Rundown"
+    r"^How\s+(?P<artist>.+?)\s+Gets?\s+(?:Their|His|Her)\b.*\bRig Rundown",
+    # "Muse's Matt Bellamy & Chris Wolstenholme", "Hayley Williams' Band Rig Rundown"
+    rf"{_RIG_INICIO}(?P<artist>.+?)\s*(?:['’]s|(?<=s)['’])\s+(?:Band\b|{_PESSOAS}){_RIG_FIM}",
+    # "Rig Rundown: GA-20", "Crowbar Rig Rundown with Kirk Windstein"
+    rf"{_RIG_INICIO}(?P<artist>.+?){_RIG_FIM}",
+]
+
+# Guitar Moves: o programa é sobre a pessoa, então o artista é ela.
+GUITAR_MOVES_ARTIST_PATTERNS = [
+    # "Josh Homme of Queens of the Stone Age | Guitar Moves Interview"
+    rf"^(?P<artist>{_PESSOA})\s+of\s+.+?\|\s*Guitar Moves Interview",
+    # "Slipknot's James Root | Guitar Moves Interview"
+    rf"^.+?['’]s\s+(?P<artist>{_PESSOA})\s*\|\s*Guitar Moves Interview",
+    # "Gwenifer Raymond | Guitar Moves Interview"
+    r"^(?P<artist>.+?)\s*\|\s*Guitar Moves Interview",
+]
+
 # Cada canal tem:
 #   id               ID do canal no YouTube
 #   keep / ignore    palavras do título para manter / descartar
@@ -106,5 +136,25 @@ CHANNELS = {
             r"^(?P<artist>.+?)\s+Rates\s",
             r"^(?P<artist>.+?)\s+Does Pitchfork",
         ],
+    },
+    "Premier Guitar": {
+        "id": "UC5J-hZ4wNf7OlkzIn49LHoQ",
+        "keep": ["Rig Rundown"],
+        # Trailers e coletâneas citam o programa, mas não são um episódio.
+        "ignore": ["Trailer", "Teaser", "Best of", "Rig Rundowns"],
+        "min_duration": 600,
+        "section": "extras",
+        "program": "Rig Rundown",
+        "artist_patterns": RIG_RUNDOWN_ARTIST_PATTERNS,
+    },
+    "Guitar Moves": {
+        "id": "UCJtWL4Quvg20xrR_C19jAow",
+        # Só os episódios completos; o canal publica muitos cortes curtos.
+        "keep": ["Guitar Moves Interview"],
+        "ignore": [],
+        "min_duration": 300,
+        "section": "extras",
+        "program": "Guitar Moves",
+        "artist_patterns": GUITAR_MOVES_ARTIST_PATTERNS,
     },
 }
