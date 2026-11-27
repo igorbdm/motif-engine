@@ -4,6 +4,11 @@
   "brìghde chaimbeul": "folk",
   "cardi b": "hip-hop",
   "chanpan": "pop",
+  "chat pile": [
+    "sludge metal",
+    "noise rock",
+    "post-hardcore"
+  ],
   "chelsea wolfe": "singer-songwriter",
   "clay street unit": "country",
   "cmat": "indie pop",
@@ -14,6 +19,11 @@
   "getúlio abelha": "art pop",
   "gillian welch & david rawlings": "alt-country",
   "hariguem zaboy": "shoegaze",
+  "hermanos gutiérrez": [
+    "instrumental rock",
+    "alternative latin",
+    "ambient americana"
+  ],
   "iguana death cult": "post-punk",
   "inoha": "indie rock",
   "inspirative": "post-rock",
@@ -21,17 +31,29 @@
   "joy oladokun": "singer-songwriter",
   "jungle": "electronic",
   "maurício pereira": "mpb",
-  "mike d": "hip hop",
+  "mike d": [
+    "hip hop"
+  ],
   "motifs": "dream pop",
   "nigeria futebol clube": "free jazz",
   "novulent": "shoegaze",
   "numeron": "metal",
   "osees": "garage rock",
+  "patti smith": [
+    "proto-punk",
+    "art rock",
+    "garage rock"
+  ],
   "penelope road": "soul",
   "peter bjorn and john": "indie",
   "robyn": "pop",
   "russian circles": "post-rock",
   "shabazz palaces": "hip-hop",
+  "slift": [
+    "space rock",
+    "psychedelic rock",
+    "heavy psych"
+  ],
   "slowwves": "shoegaze",
   "sub:shaman": "math rock",
   "sweeping promises": "post-punk",

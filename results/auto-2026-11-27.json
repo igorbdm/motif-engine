@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "edition_key": "auto-2026-11-27",
+  "request_id": "e2-r1-4e056e",
+  "edition_date": "2026-11-27",
+  "window": {
+    "start": "2026-11-20T00:00:00-03:00",
+    "end": "2026-11-27T10:00:56-03:00"
+  },
+  "generated_at": "2026-11-27T13:00:56+00:00",
+  "run": {
+    "id": 46003304890,
+    "url": "https://github.com/igorbdm/motif-engine/actions/runs/46003304890"
+  },
+  "song_of_the_week": {
+    "artist": "Paira",
+    "title": "Como um Rio",
+    "album": "EP01",
+    "image": "https://coverartarchive.org/release/0d39c07e-daa3-4134-ab5e-fd8222c451fb/front-500",
+    "links": {
+      "spotify": "https://open.spotify.com/search/Paira%20Como%20um%20Rio",
+      "apple_music": "https://music.apple.com/us/album/como-um-rio/1749306871?i=1749308327",
+      "youtube_music": "https://music.youtube.com/watch?v=0hhbkAVCEss",
+      "tidal": "https://tidal.com/search?q=Paira+Como+um+Rio"
+    },
+    "source": "manual"
+  },
+  "videos": [
+    {
+      "id": "7_0iN8skvJc",
+      "title": "Hermanos Gutiérrez - Full Performance (Live on KEXP)",
+      "display_title": "Hermanos Gutiérrez — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=7_0iN8skvJc",
+      "section": "live",
+      "genre": "instrumental rock",
+      "genres": [
+        "instrumental rock",
+        "alternative latin",
+        "ambient americana"
+      ],
+      "country": "CH",
+      "views": 157657,
+      "published": "2026-11-24T16:00:31Z"
+    },
+    {
+      "id": "tMJbTmNbeMc",
+      "title": "Chat Pile - Full Performance (Live on KEXP)",
+      "display_title": "Chat Pile — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=tMJbTmNbeMc",
+      "section": "live",
+      "genre": "sludge metal",
+      "genres": [
+        "sludge metal",
+        "noise rock",
+        "post-hardcore"
+      ],
+      "country": "US",
+      "views": 253969,
+      "published": "2026-11-23T16:00:39Z"
+    },
+    {
+      "id": "pjX0K1T3tkk",
+      "title": "SLIFT - Full Performance (Live on KEXP)",
+      "display_title": "SLIFT — Live on KEXP",
+      "channel": "KEXP",
+      "link": "https://www.youtube.com/watch?v=pjX0K1T3tkk",
+      "section": "live",
+      "genre": "space rock",
+      "genres": [
+        "space rock",
+        "psychedelic rock",
+        "heavy psych"
+      ],
+      "country": "FR",
+      "views": 219786,
+      "published": "2026-11-20T16:00:20Z"
+    },
+    {
+      "id": "lN96f4SwJyk",
+      "title": "Patti Smith: Tiny Desk Concert",
+      "display_title": "Patti Smith — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=lN96f4SwJyk",
+      "section": "live",
+      "genre": "proto-punk",
+      "genres": [
+        "proto-punk",
+        "art rock",
+        "garage rock"
+      ],
+      "country": "US",
+      "views": 579353,
+      "published": "2026-11-25T10:00:27Z"
+    },
+    {
+      "id": "_l1DbqVacBc",
+      "title": "Will Liverman: Tiny Desk Concert",
+      "display_title": "Will Liverman — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=_l1DbqVacBc",
+      "section": "live",
+      "genre": "classical",
+      "genres": [
+        "classical"
+      ],
+      "country": "US",
+      "views": 96500,
+      "published": "2026-11-23T10:00:39Z"
+    },
+    {
+      "id": "r5W4W6aWw_M",
+      "title": "Mike D: Tiny Desk Concert",
+      "display_title": "Mike D — Tiny Desk Concert",
+      "channel": "Tiny Desk",
+      "link": "https://www.youtube.com/watch?v=r5W4W6aWw_M",
+      "section": "live",
+      "genre": "hip hop",
+      "genres": [
+        "hip hop"
+      ],
+      "country": "US",
+      "views": 933106,
+      "published": "2026-11-20T10:00:06Z"
+    },
+    {
+      "id": "4Nym4a5d9_w",
+      "title": "INOHA on Audiotree Live (Full Session)",
+      "display_title": "INOHA — Audiotree Live",
+      "channel": "Audiotree",
+      "link": "https://www.youtube.com/watch?v=4Nym4a5d9_w",
+      "section": "live",
+      "genre": "indie rock",
+      "genres": [
+        "indie rock"
+      ],
+      "country": "US",
+      "views": 13930,
+      "published": "2026-11-20T18:00:06Z"
+    },
+    {
+      "id": "UB5blZVnhg8",
+      "title": "CULTURA LIVRE | JULIA GUEDES | 21/11/2026",
+      "display_title": "JULIA GUEDES — Cultura Livre",
+      "channel": "Cultura Livre",
+      "link": "https://www.youtube.com/watch?v=UB5blZVnhg8",
+      "section": "live",
+      "genre": "latin",
+      "genres": [
+        "latin"
+      ],
+      "country": null,
+      "views": 5619,
+      "published": "2026-11-21T22:30:07Z"
+    }
+  ],
+  "warnings": []
+}
